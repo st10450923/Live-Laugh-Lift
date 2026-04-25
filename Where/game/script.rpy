@@ -1,4 +1,4 @@
-﻿default progress = 0
+default progress = 0
 default item_text = ["Steak","Protein Shake", "Dumb dfoasdfohsdhfuoihsdfoiuhsdouifh Bells", "Syringe", "Big Chilli", "Skeleton Silver Key", "Obsidian Kettlebell", "Growth Mindset", "Forbidden Creatine", "Sigmanomicon book", "Now... make your choice. Who do you choose?"]
 default choice = ""
 
@@ -106,9 +106,9 @@ screen ui:
     
     # half-implemented below:
 
-    hbox:
-        align(0.98,0.5)
-        add "item_bar.png"
+    # hbox:
+    #     align(0.98,0.5)
+    #     add "item_bar.png"
 
             # add "item_bar.png"
                 # for i in range(10):
@@ -118,13 +118,18 @@ screen ui:
 
 
 
-    # Please help here!
-    # Vertical box with blacked out items depending on progress
-
-    # vbox:
-        # align(1,0.5) # far right on screen
-        # add "item_bar.png"
-    #     etc
-    
+    vbox:
+        align (0.98, -0.2)  # Centers the vbox on the screen
+        spacing 0        # Adds 10 pixels of vertical space between images
+        frame:
+            xysize (120, 850)
+            padding (20, 15)
+            background Frame("images/item_bar.png", gui.notify_frame_borders, tile=gui.frame_tile)
+        for i in range (10):
+            vbox:
+                add "item_circle.png"
+                xysize(20,20)
+                yoffset(-850)
+                xoffset(50)
 
     
