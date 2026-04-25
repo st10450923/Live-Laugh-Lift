@@ -6,12 +6,15 @@ default progress = 0
 default item_text = ["Steak","Dumbell", "Syringe", "Big Chilli", "Forbidden Creatine", "Obsidian Kettlebell", "Growth Mindset", "Skeleton Silver Key", "Lighter", "Sigmanomicon book", "You've done it. You've summoned him."]
 default choice = ""
 
+
+label prologue:
+    scene black 
+    show text "You're enjoying a normal Saturday night braai, until you see your beloved wife Melissa smooching some sexy bodybuilder! How are you supposed to compete with that? He's huge! There's no way you could get shredded enough to win back your wife's  affection before the end of the braai...unless...you found a way to summon the god of muscles himself! There must be something around here that you could use to call upon the god of gains to help you in these dire times..."
+    pause
+    return
+
 label start:
-
-
-
-
-
+    jump prologue
     play music "venue_ambience.ogg" volume 2
     scene background # house
     call screen play_game # 
