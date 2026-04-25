@@ -1,8 +1,13 @@
 ﻿default progress = 0
-default item_text = ["Steak","Protein Shake", "Dumb dfoasdfohsdhfuoihsdfoiuhsdouifh Bells", "Syringe", "Big Chilli", "Skeleton Silver Key", "Obsidian Kettlebell", "Growth Mindset", "Forbidden Creatine", "Sigmanomicon book", "Now... make your choice. Who do you choose?"]
+default item_text = ["Steak","Protein Shake", "Dumb Bells", "Syringe", "Big Chilli", "Skeleton Silver Key", "Obsidian Kettlebell", "Growth Mindset", "Forbidden Creatine", "Sigmanomicon book", "Now... make your choice. Who do you choose?"]
 default choice = ""
 
 label start:
+
+
+
+
+
     play music "venue_ambience.ogg" volume 2
     scene background # house
     call screen play_game # 
@@ -52,7 +57,7 @@ screen play_game:
         focus_mask True idle "item_9.png" action SetVariable("progress", 9) sensitive progress == 8
         activate_sound "website_click.wav"
     imagebutton:
-        focus_mask True idle "item_10.png" action SetVariable("progress", 10) sensitive progress == 9
+        focus_mask True idle "book_icon.png" action SetVariable("progress", 10) sensitive progress == 9
         activate_sound "website_click.wav"
     if progress == 10:
         imagebutton:
@@ -63,6 +68,21 @@ screen play_game:
             activate_sound "website_click.wav"
 
     use ui()
+
+    if progress == 7:
+        add "fog.png":
+            alpha 0.3
+    elif progress == 8:
+        add "fog.png":
+            matrixcolor TintMatrix("#ff9c9c")
+            alpha 0.5
+    elif progress == 9:
+        add "fog.png":
+            matrixcolor TintMatrix("#ff7171")
+            alpha 1
+    elif progress == 10:
+        add "glow.png":
+            alpha 1
 
 screen ui:
 
@@ -153,9 +173,9 @@ screen ui:
         for i in range (1):
             vbox:
                 if progress <1:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                    add "steak_icon.png" matrixcolor TintMatrix("#000000")
                 else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                    add "steak_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <2:
                     add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
                 else:
@@ -173,25 +193,25 @@ screen ui:
                 else:
                     add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <6:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                    add "syringe_icon.png" matrixcolor TintMatrix("#000000")
                 else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                    add "syringe_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <7:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                    add "brain_icon.png" matrixcolor TintMatrix("#000000")
                 else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                    add "brain_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress<8:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                    add "key_icon.png" matrixcolor TintMatrix("#000000")
                 else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                    add "key_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <9:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                    add "lighter_icon.png" matrixcolor TintMatrix("#000000")
                 else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                    add "lighter_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <10:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                    add "book_icon.png" matrixcolor TintMatrix("#000000")
                 else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                    add "book_icon.png" matrixcolor TintMatrix("#ffffff")
                 yoffset(-835)
                 xoffset(20)
                 spacing (5)
