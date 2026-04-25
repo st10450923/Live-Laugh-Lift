@@ -292,7 +292,8 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        xpos gui.navigation_xpos
+        # xpos gui.navigation_xpos
+        xalign 0.5
         yalign 0.5
 
         spacing gui.navigation_spacing
@@ -301,15 +302,15 @@ screen navigation():
 
             textbutton _("Start") action Start()
 
-        else:
+        # else:
 
-            textbutton _("History") action ShowMenu("history")
+        #     textbutton _("History") action ShowMenu("history")
 
-            textbutton _("Save") action ShowMenu("save")
+        #     textbutton _("Save") action ShowMenu("save")
 
-        textbutton _("Load") action ShowMenu("load")
+        # textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Options") action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -319,12 +320,12 @@ screen navigation():
 
             textbutton _("Main Menu") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        textbutton _("Credits") action ShowMenu("about")
 
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+        # if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+        #     ## Help isn't necessary or relevant to mobile devices.
+        #     textbutton _("Help") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
@@ -358,23 +359,23 @@ screen main_menu():
     add gui.main_menu_background
 
     ## This empty frame darkens the main menu.
-    frame:
-        style "main_menu_frame"
+    # frame:
+    #     style "main_menu_frame"
 
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
     use navigation
 
-    if gui.show_name:
+    # if gui.show_name:
 
-        vbox:
-            style "main_menu_vbox"
+    #     vbox:
+    #         style "main_menu_vbox"
 
-            text "[config.name!t]":
-                style "main_menu_title"
+    #         text "[config.name!t]":
+    #             style "main_menu_title"
 
-            text "[config.version]":
-                style "main_menu_version"
+    #         text "[config.version]":
+    #             style "main_menu_version"
 
 
 style main_menu_frame is empty
@@ -733,82 +734,88 @@ style slot_button_text:
 screen preferences():
 
     tag menu
+    
+    vbox:
+        align(0.5,0.5)
+        frame:
+            background Frame("menu_frame.png", 50, 50)
+            padding (100, 50)
+        # use game_menu(_("Preferences"), scroll="viewport"):
 
-    use game_menu(_("Preferences"), scroll="viewport"):
+            vbox:
+                align(0.5,0.5)
 
-        vbox:
+                hbox:
+                    box_wrap True
 
-            hbox:
-                box_wrap True
+                    if renpy.variant("pc") or renpy.variant("web"):
 
-                if renpy.variant("pc") or renpy.variant("web"):
+                        vbox:
+                            style_prefix "radio"
+                            label _("Display")
+                            textbutton _("Window") action Preference("display", "window")
+                            textbutton _("Fullscreen") action Preference("display", "fullscreen")
+
+                    # vbox:
+                    #     style_prefix "check"
+                    #     label _("Skip")
+                    #     textbutton _("Unseen Text") action Preference("skip", "toggle")
+                    #     textbutton _("After Choices") action Preference("after choices", "toggle")
+                    #     textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+
+                    ## Additional vboxes of type "radio_pref" or "check_pref" can be
+                    ## added here, to add additional creator-defined preferences.
+
+                null height (4 * gui.pref_spacing)
+
+                hbox:
+                    style_prefix "slider"
+                    box_wrap True
+
+                    # vbox:
+
+                    #     label _("Text Speed")
+
+                    #     bar value Preference("text speed")
+
+                    #     label _("Auto-Forward Time")
+
+                    #     bar value Preference("auto-forward time")
 
                     vbox:
-                        style_prefix "radio"
-                        label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
-                vbox:
-                    style_prefix "check"
-                    label _("Skip")
-                    textbutton _("Unseen Text") action Preference("skip", "toggle")
-                    textbutton _("After Choices") action Preference("after choices", "toggle")
-                    textbutton _("Transitions") action InvertSelected(Preference("transitions", "toggle"))
+                        if config.has_music:
+                            label _("Music Volume")
 
-                ## Additional vboxes of type "radio_pref" or "check_pref" can be
-                ## added here, to add additional creator-defined preferences.
+                            hbox:
+                                bar value Preference("music volume")
 
-            null height (4 * gui.pref_spacing)
+                        if config.has_sound:
 
-            hbox:
-                style_prefix "slider"
-                box_wrap True
+                            label _("Sound Volume")
 
-                vbox:
+                            hbox:
+                                bar value Preference("sound volume")
 
-                    label _("Text Speed")
-
-                    bar value Preference("text speed")
-
-                    label _("Auto-Forward Time")
-
-                    bar value Preference("auto-forward time")
-
-                vbox:
-
-                    if config.has_music:
-                        label _("Music Volume")
-
-                        hbox:
-                            bar value Preference("music volume")
-
-                    if config.has_sound:
-
-                        label _("Sound Volume")
-
-                        hbox:
-                            bar value Preference("sound volume")
-
-                            if config.sample_sound:
-                                textbutton _("Test") action Play("sound", config.sample_sound)
+                                if config.sample_sound:
+                                    textbutton _("Test") action Play("sound", config.sample_sound)
 
 
-                    if config.has_voice:
-                        label _("Voice Volume")
+                        # if config.has_voice:
+                        #     label _("Voice Volume")
 
-                        hbox:
-                            bar value Preference("voice volume")
+                        #     hbox:
+                        #         bar value Preference("voice volume")
 
-                            if config.sample_voice:
-                                textbutton _("Test") action Play("voice", config.sample_voice)
+                        #         if config.sample_voice:
+                        #             textbutton _("Test") action Play("voice", config.sample_voice)
 
-                    if config.has_music or config.has_sound or config.has_voice:
-                        null height gui.pref_spacing
+                        if config.has_music or config.has_sound or config.has_voice:
+                            null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                            textbutton _("Mute All"):
+                                action Preference("all mute", "toggle")
+                                style "mute_all_button"
 
 
 style pref_label is gui_label

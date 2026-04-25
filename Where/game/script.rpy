@@ -1,4 +1,4 @@
-default progress = 0
+﻿default progress = 0
 default item_text = ["Steak","Protein Shake", "Dumb dfoasdfohsdhfuoihsdfoiuhsdouifh Bells", "Syringe", "Big Chilli", "Skeleton Silver Key", "Obsidian Kettlebell", "Growth Mindset", "Forbidden Creatine", "Sigmanomicon book", "Now... make your choice. Who do you choose?"]
 default choice = ""
 
@@ -106,9 +106,9 @@ screen ui:
     
     # half-implemented below:
 
-    # hbox:
-    #     align(0.98,0.5)
-    #     add "item_bar.png"
+    hbox:
+        align(0.98,0.5)
+        add "item_bar.png"
 
             # add "item_bar.png"
                 # for i in range(10):
