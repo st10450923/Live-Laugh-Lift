@@ -336,8 +336,7 @@ screen navigation():
 
         if main_menu:
 
-            textbutton _("Start") action Start()
-
+            textbutton _("Start") action Start() text_size (100)
         # else:
 
         #     textbutton _("History") action ShowMenu("history")
@@ -346,7 +345,7 @@ screen navigation():
 
         # textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Options") action ToggleScreen("preferences")
+        textbutton _("Options") action ToggleScreen("preferences")text_size (50)
 
         if _in_replay:
 
@@ -356,7 +355,7 @@ screen navigation():
 
             textbutton _("Main Menu") action MainMenu()
 
-        textbutton _("Credits") action ToggleScreen("about")
+        textbutton _("Credits") action ToggleScreen("about")text_size (50)
 
         # if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
@@ -367,7 +366,7 @@ screen navigation():
 
             ## The quit button is banned on iOS and unnecessary on Android and
             ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+            textbutton _("Quit") action Quit(confirm=not main_menu)text_size (50)
 
 
 style navigation_button is gui_button
