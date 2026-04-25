@@ -117,14 +117,19 @@ screen ui:
 
 
 
+    vbox:
+        align (0.98, -0.2)  # Centers the vbox on the screen
+        spacing 5        # Adds 10 pixels of vertical space between images
+        frame:
+            xysize (120, 850)
+            padding (20, 15)    
+            background Frame("images/item_bar.png", gui.notify_frame_borders, tile=gui.frame_tile)
+        for i in range (10):
+            vbox:
+                add "item_circle.png"
+                xysize(20,20)
+                yoffset(-835)
+                xoffset(20)
 
-    # Please help here!
-    # Vertical box with blacked out items depending on progress
-
-    # vbox:
-        # align(1,0.5) # far right on screen
-        # add "item_bar.png"
-    #     etc
-    
 
     
