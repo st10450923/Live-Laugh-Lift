@@ -251,7 +251,10 @@ screen quick_menu():
                     # ymaximum 48
                     padding (10, 10)
                     background Frame("options_tab.png", left = 10, top = 20, right = 10)
-                    textbutton _("Options") action ToggleScreen('preferences')
+                    textbutton _("Options") action ToggleScreen('preferences'):
+                        
+                        hover_sound "website_click.wav"
+                        # activate_sound "button_hover_low.wav"
                 at hover_trans
             vbox:
                 frame:
@@ -259,7 +262,9 @@ screen quick_menu():
                     # ymaximum 48
                     padding (10, 10)
                     background Frame("options_tab.png", left = 10, top = 20, right = 10)
-                    textbutton _("Main Menu") action MainMenu()
+                    textbutton _("Main Menu") action MainMenu():
+                        hover_sound "website_click.wav"
+                        # activate_sound "button_hover_low.wav"
                 at hover_trans
 
                 # hbox:
@@ -603,10 +608,10 @@ screen about():
                         spacing 10
                         vbox:
                             label "ART"
-                            text "Person1, person2, person3, person4\n"
+                            text "Brett Magill\nReneé Van Heerden\nDevilliers Cloete\nBulumko Mevana\n"
 
                             label "PROGRAMMING"
-                            text "Person1, person2"
+                            text "Sabrina Roberts\nEmber Jones"
 
 
     # use game_menu(_("About"), scroll="viewport"):
@@ -788,7 +793,6 @@ style slot_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
 screen preferences():
-
     # tag menu
     tag option_menu
     vbox:
@@ -872,7 +876,7 @@ screen preferences():
                             textbutton _("Mute All"):
                                 action Preference("all mute", "toggle")
                                 style "mute_all_button"
-        at appear_transform
+        # at appear_transform
 
 transform appear_transform:
     on show:
@@ -1238,7 +1242,7 @@ screen confirm(message, yes_action, no_action):
 
     ## Ensure other screens do not get input while this screen is displayed.
     modal True
-
+    tag option_menu
     zorder 200
 
     style_prefix "confirm"

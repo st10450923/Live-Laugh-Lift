@@ -3,7 +3,7 @@ default item_text = ["Steak","Protein Shake", "Dumb dfoasdfohsdhfuoihsdfoiuhsdou
 default choice = ""
 
 label start:
-    
+    play music "venue_ambience.ogg" volume 2
     scene background # house
     call screen play_game # 
     pause
@@ -24,31 +24,43 @@ screen play_game:
     
     imagebutton:
         focus_mask True idle "item_1.png" action SetVariable("progress", 1) sensitive progress == 0
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_2.png" action SetVariable("progress", 2) sensitive progress == 1
+        activate_sound "website_click.wav"
     if progress < 1:
         add "block_out.png"
     imagebutton:
         focus_mask True idle "item_3.png" action SetVariable("progress", 3) sensitive progress == 2
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_4.png" action SetVariable("progress", 4) sensitive progress == 3
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_5.png" action SetVariable("progress", 5) sensitive progress == 4
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_6.png" action SetVariable("progress", 6) sensitive progress == 5
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_7.png" action SetVariable("progress", 7) sensitive progress == 6
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_8.png" action SetVariable("progress", 8) sensitive progress == 7
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_9.png" action SetVariable("progress", 9) sensitive progress == 8
+        activate_sound "website_click.wav"
     imagebutton:
         focus_mask True idle "item_10.png" action SetVariable("progress", 10) sensitive progress == 9
+        activate_sound "website_click.wav"
     if progress == 10:
         imagebutton:
             focus_mask True idle "wife.png" action [SetVariable("choice", "wife"), Jump("end")]
+            activate_sound "website_click.wav"
         imagebutton:
             focus_mask True idle "god.png" action [SetVariable("choice", "god"), Jump("end")]
+            activate_sound "website_click.wav"
 
     use ui()
 
