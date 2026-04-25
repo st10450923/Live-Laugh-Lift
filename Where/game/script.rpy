@@ -9,12 +9,12 @@ default choice = ""
 
 label prologue:
     scene black 
-    show text "You're enjoying a normal Saturday night braai, until you see your beloved wife Melissa smooching some sexy bodybuilder! How are you supposed to compete with that? He's huge! There's no way you could get shredded enough to win back your wife's  affection before the end of the braai...unless...you found a way to summon the god of muscles himself! There must be something around here that you could use to call upon the god of gains to help you in these dire times..."
+    show text "You're enjoying a normal Saturday night braai, when all of a sudden... \n you see your beloved wife Melissa smooching some sexy bodybuilder! \n\nHow are you supposed to compete with that guy? \nHe's huge! \n\nThere's no way you could get shredded enough to win your wife back before the end of the braai!\n\n...unless...\n\n you find some way to summon the god of muscles himself to help you! \n\nThere must be something around here you can use to call the god of gains to aid you in these trying times..."
     pause
     return
 
 label start:
-    jump prologue
+    call prologue
     play music "venue_ambience.ogg" volume 2
     scene background # house
     call screen play_game # 
