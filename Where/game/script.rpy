@@ -129,7 +129,63 @@ screen ui:
                 add "item_circle.png"
                 xysize(20,20)
                 yoffset(-835)
+                xoffset(20) 
+
+    vbox:
+        align (0.98, -0.2)  # Centers the vbox on the screen
+        spacing 5        # Adds 10 pixels of vertical space between images
+        frame:
+            xysize (120, 850)
+            padding (20, 15)    
+            background None
+        for i in range (1):
+            vbox:
+                if progress <1:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <2:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <3:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <4:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <5:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <6:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <7:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress<8:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <9:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <10:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
+                yoffset(-835)
                 xoffset(20)
+                spacing (5)
+            
+                
 
 
+            
     
