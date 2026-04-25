@@ -518,8 +518,8 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
 
     label title
 
-    if main_menu:
-        key "game_menu" action ShowMenu("main_menu")
+    # if main_menu:
+    #     key "game_menu" action ShowMenu("main_menu")
 
 
 style game_menu_outer_frame is empty

@@ -1,5 +1,9 @@
-﻿default progress = 0
-default item_text = ["Steak","Protein Shake", "Dumb Bells", "Syringe", "Big Chilli", "Skeleton Silver Key", "Obsidian Kettlebell", "Growth Mindset", "Forbidden Creatine", "Sigmanomicon book", "Now... make your choice. Who do you choose?"]
+﻿init python:
+    config.keymap['game_menu'].remove('K_ESCAPE')
+    config.keymap['game_menu'].remove('mouseup_3')
+
+default progress = 0
+default item_text = ["Steak","Dumbell", "Syringe", "Big Chilli", "Forbidden Creatine", "Obsidian Kettlebell", "Growth Mindset", "Skeleton Silver Key", "Lighter", "Sigmanomicon book", "You've done it. You've summoned him."]
 default choice = ""
 
 label start:
@@ -15,13 +19,13 @@ label start:
     return
 
 label end:
-    show win
-    with dissolve
-    if choice == "wife":
-        show text "You chose your wife!"
-    else:
-        show text "You chose the Eldritch God!"
-    pause 10
+    stop music
+    stop sound
+    stop audio
+    scene black
+    # with dissolve
+    show text "YOU WON!"
+    pause 5
     return
 
 screen play_game:
@@ -57,12 +61,12 @@ screen play_game:
         focus_mask True idle "item_9.png" action SetVariable("progress", 9) sensitive progress == 8
         activate_sound "website_click.wav"
     imagebutton:
-        focus_mask True idle "book_icon.png" action SetVariable("progress", 10) sensitive progress == 9
+        focus_mask True idle "item_10.png" action SetVariable("progress", 10) sensitive progress == 9
         activate_sound "website_click.wav"
     if progress == 10:
-        imagebutton:
-            focus_mask True idle "wife.png" action [SetVariable("choice", "wife"), Jump("end")]
-            activate_sound "website_click.wav"
+        # imagebutton:
+        #     focus_mask True idle "wife.png" action [SetVariable("choice", "wife"), Jump("end")]
+        #     activate_sound "website_click.wav"
         imagebutton:
             focus_mask True idle "god.png" action [SetVariable("choice", "god"), Jump("end")]
             activate_sound "website_click.wav"
@@ -112,7 +116,7 @@ screen ui:
         elif progress == 9:
             add "stat_9.png"
         elif progress == 10:
-            add "stat_10.png"
+            add "stat_9.png"
 
     
     # Textbox to get this item
@@ -181,21 +185,21 @@ screen ui:
                 else:
                     add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <3:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
-                else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
-                if progress <4:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
-                else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
-                if progress <5:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#000000")
-                else:
-                    add "dumbell_icon.png" matrixcolor TintMatrix("#ffffff")
-                if progress <6:
                     add "syringe_icon.png" matrixcolor TintMatrix("#000000")
                 else:
                     add "syringe_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <4:
+                    add "chili_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "chili_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <5:
+                    add "creatine_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "creatine_icon.png" matrixcolor TintMatrix("#ffffff")
+                if progress <6:
+                    add "kettlebell_icon.png" matrixcolor TintMatrix("#000000")
+                else:
+                    add "kettlebell_icon.png" matrixcolor TintMatrix("#ffffff")
                 if progress <7:
                     add "brain_icon.png" matrixcolor TintMatrix("#000000")
                 else:
