@@ -239,22 +239,53 @@ screen quick_menu():
 
     ## Ensure this appears on top of other screens.
     zorder 100
-
+    
     if quick_menu:
-
         hbox:
-            style_prefix "quick"
-            style "quick_menu"
+            align(0.5,0.9)
+            yoffset 120
+            spacing 20
+            vbox:
+                frame:
 
-            textbutton _("Back") action Rollback()
-            textbutton _("History") action ShowMenu('history')
-            textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
-            textbutton _("Auto") action Preference("auto-forward", "toggle")
-            textbutton _("Save") action ShowMenu('save')
-            textbutton _("Q.Save") action QuickSave()
-            textbutton _("Q.Load") action QuickLoad()
-            textbutton _("Prefs") action ShowMenu('preferences')
+                    # ymaximum 48
+                    padding (10, 10)
+                    background Frame("options_tab.png", left = 10, top = 20, right = 10)
+                    textbutton _("Options") action ToggleScreen('preferences')
+                at hover_trans
+            vbox:
+                frame:
 
+                    # ymaximum 48
+                    padding (10, 10)
+                    background Frame("options_tab.png", left = 10, top = 20, right = 10)
+                    textbutton _("Main Menu") action MainMenu()
+                at hover_trans
+
+                # hbox:
+                #     style_prefix "quick"
+                #     style "quick_menu"
+                #     textbutton _("Options") action ToggleScreen('preferences')
+                #     textbutton _("Main Menu") action ToggleScreen('main_menu')
+transform hover_trans:
+    on hover:
+        linear 0.1 yoffset -10
+    on idle:
+        linear 0.1 yoffset 0
+
+transform options_menu_hover:
+    matrixcolor TintMatrix("#ffffff")
+    on hover:
+        matrixcolor TintMatrix("#ffc6fe")*BrightnessMatrix(0.2)
+
+    on idle:
+        matrixcolor TintMatrix("#ffffff")*BrightnessMatrix(0)
+
+    on selected_idle:
+        matrixcolor TintMatrix("#ffffff")*BrightnessMatrix(0.3)
+   
+    on selected_hover:
+        matrixcolor TintMatrix("#ffffff")*BrightnessMatrix(0.3)
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
@@ -292,8 +323,8 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        # xpos gui.navigation_xpos
-        xalign 0.5
+        xpos gui.navigation_xpos
+        # xalign 0
         yalign 0.5
 
         spacing gui.navigation_spacing
@@ -310,7 +341,7 @@ screen navigation():
 
         # textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Options") action ShowMenu("preferences")
+        textbutton _("Options") action ToggleScreen("preferences")
 
         if _in_replay:
 
@@ -320,7 +351,7 @@ screen navigation():
 
             textbutton _("Main Menu") action MainMenu()
 
-        textbutton _("Credits") action ShowMenu("about")
+        textbutton _("Credits") action ToggleScreen("about")
 
         # if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
@@ -548,25 +579,50 @@ style return_button:
 
 screen about():
 
-    tag menu
+    tag option_menu
 
     ## This use statement includes the game_menu screen inside this one. The
     ## vbox child is then included inside the viewport inside the game_menu
     ## screen.
-    use game_menu(_("About"), scroll="viewport"):
 
-        style_prefix "about"
+    vbox:
+        align(0.5,0.5)
+        # textbutton "<- Back" action Return()
+        frame:
+            background Frame("menu_frame.png", 50, 50)
+            padding (100, 100)
+        # use game_menu(_("Preferences"), scroll="viewport"):
 
-        vbox:
+            vbox:
+                align(0.5,0.5)
 
-            label "[config.name!t]"
-            text _("Version [config.version!t]\n")
+                hbox:
+                    box_wrap True
 
-            ## gui.about is usually set in options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
+                    if renpy.variant("pc") or renpy.variant("web"):
+                        spacing 10
+                        vbox:
+                            label "ART"
+                            text "Person1, person2, person3, person4\n"
 
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+                            label "PROGRAMMING"
+                            text "Person1, person2"
+
+
+    # use game_menu(_("About"), scroll="viewport"):
+
+    #     style_prefix "about"
+
+    #     vbox:
+
+    #         label "[config.name!t]"
+    #         text _("Version [config.version!t]\n")
+
+    #         ## gui.about is usually set in options.rpy.
+    #         if gui.about:
+    #             text "[gui.about!t]\n"
+
+    #         text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
 
 
 style about_label is gui_label
@@ -733,8 +789,8 @@ style slot_button_text:
 
 screen preferences():
 
-    tag menu
-    
+    # tag menu
+    tag option_menu
     vbox:
         align(0.5,0.5)
         frame:
@@ -752,7 +808,7 @@ screen preferences():
 
                         vbox:
                             style_prefix "radio"
-                            label _("Display")
+                            label _("DISPLAY")
                             textbutton _("Window") action Preference("display", "window")
                             textbutton _("Fullscreen") action Preference("display", "fullscreen")
 
@@ -785,7 +841,7 @@ screen preferences():
                     vbox:
 
                         if config.has_music:
-                            label _("Music Volume")
+                            label _("MUSIC VOLUME")
 
                             hbox:
                                 bar value Preference("music volume")
@@ -795,7 +851,7 @@ screen preferences():
                             label _("Sound Volume")
 
                             hbox:
-                                bar value Preference("sound volume")
+                                bar value Preference("SOUND VOLUME")
 
                                 if config.sample_sound:
                                     textbutton _("Test") action Play("sound", config.sample_sound)
@@ -816,8 +872,33 @@ screen preferences():
                             textbutton _("Mute All"):
                                 action Preference("all mute", "toggle")
                                 style "mute_all_button"
+        at appear_transform
 
+transform appear_transform:
+    on show:
+        titleappear
+    on hide:
+        slip_up
+transform titleappear:
+    yoffset -1000
+    # pause 0.2
+    ease 0.5 yoffset 100
+    ease 0.2 yoffset -50
+    ease 0.2 yoffset 40
+    ease 0.2 yoffset -30
+    ease 0.5 yoffset 20
+    ease 1 yoffset -20
+    ease 1.2 yoffset 10
+    ease 1.5 yoffset -10
+    vbounce
 
+transform slip_up:
+    easeout 1 yoffset -1000   
+    
+transform vbounce:
+    ease 5 yoffset 20
+    ease 5 yoffset -20
+    repeat
 style pref_label is gui_label
 style pref_label_text is gui_label_text
 style pref_vbox is vbox
@@ -1193,8 +1274,13 @@ style confirm_button is gui_medium_button
 style confirm_button_text is gui_medium_button_text
 
 style confirm_frame:
-    background Frame([ "gui/confirm_frame.png", "gui/frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
-    padding gui.confirm_frame_borders.padding
+
+
+    background Frame("menu_frame.png", 50, 50)
+    padding (100, 100)
+
+    # background Frame([ "gui/confirm_frame.png", "gui/frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
+    # padding gui.confirm_frame_borders.padding
     xalign .5
     yalign .5
 
